@@ -24,22 +24,34 @@ sudo apt install hydra -y
 sudo apt-get install metasploit-framework -y
 }
 
+#Call the installation function for updates, upgrades and installations
 inst
 
+#Utilise crunch which comes in preinstalled with Kali Linux to generate lists
+#Create a list of users which is needed for some attacks 
 crunch 4 4 abcdefghijklmnopqrstuvwx > user.lst
+#Create a list of passwords which is needed for some attacks
 crunch 4 4 abcde > password.lst
 
+#A function which allows the user to conduct nmap and masscans , and also carry out hydra and msfconsole smb brute force attacks
 function scanattacker()
 {
 
-read -p "Would you like to a) Run a nmap scan b) Run a masscan c) Run a hydra attack  d) mfsconsole e) exit : " choices 
+#Display all the options users can run 
+read -p "Would you like to a) Run a nmap scan b) Run a masscan c) Run a hydra attack  d) Run mfsconsole-smb attack e) exit : " choices 
 
 case $choices in 
 	
 	a)
+		#User needs to enter the the target ip address they would like to do nmap scan
 		echo 'Enter ip address to do a nmap'
+		#Read ipaddress provided by user and store it in a variable
 		read ip_addr
 		echo "$ip_addr"
+
+		#Conduct a namp scan on 1001 ports on the ipaddress provided by the user
+		#The scan reuslts are kept in the nmap_scanresults text file which 
+		#Results can be found in the same working directory where this script is run
 		sudo nmap -p0-1000 $ip_addr >>nmap_scanresults.txt
 		
 		if [ $? -eq 0 ]; then
