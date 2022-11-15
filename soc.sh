@@ -26,6 +26,8 @@ sudo apt-get install metasploit-framework -y
 
 inst
 
+#Utilise crunch which comes in preinstalled with Kali Linux to generate lists
+#Create a list of users which is needed for some attacks
 crunch 4 4 abcdefghijklmnopqrstuvwx > user.lst
 crunch 4 4 abcde > password.lst
 
